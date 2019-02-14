@@ -16,9 +16,7 @@ import javax.inject.Inject
 class FetchMoviesUseCase
 @Inject constructor(private val repository: MoviesRepository) : UseCase<List<Movie>, Params>() {
 
-    override fun createWith(params: Params?): Flowable<List<Movie>> = repository.fetchMovie()
-        .delay(5, TimeUnit.SECONDS)
-        .repeat(100)
+    override fun createWith(params: Params?): Flowable<List<Movie>> = repository.fetchMovie().toFlowable()
 
     data class Params(val year: String)
 }

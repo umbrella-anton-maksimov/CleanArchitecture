@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.course.clean.R
 import com.course.clean.core.FlowManager
+import com.course.clean.entity.Movie
 import kotlinx.android.synthetic.main.activity_movies.*
 
 class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
@@ -11,7 +12,6 @@ class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
     private val flowManager by lazy {
         FlowManager(supportFragmentManager)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +24,17 @@ class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
 
     override fun back() = when {
         flowManager.size <= 1 -> finish()
-        else -> flowManager.popBackStack()
+        else                  -> flowManager.popBackStack()
     }
 
+    override fun openMovieDetails(movie: Movie) {
+        val params = hashMapOf("movie" to movie)
+        flowManager.navigateTo(MovieDetailsFragment::class.java, params)
+    }
 
     private fun showToolbar(visible: Boolean) {
         when (visible) {
-            true -> supportActionBar?.show()
+            true  -> supportActionBar?.show()
             false -> supportActionBar?.hide()
         }
     }
@@ -47,7 +51,7 @@ class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
 
 
     private fun initFragment() {
-        flowManager.addFragment(MoviesFragment::class.java)
+        flowManager.navigateTo(MoviesFragment::class.java)
     }
 
     private fun initToolbar() {

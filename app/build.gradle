@@ -59,4 +59,7 @@ dependencies {
     api project(path: ':view')
     implementation 'com.android.support:design:28.0.0'
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 }

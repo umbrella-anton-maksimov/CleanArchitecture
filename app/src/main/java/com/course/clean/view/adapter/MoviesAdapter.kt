@@ -19,10 +19,15 @@ class MoviesAdapter : RecyclerView.Adapter<ViewHolder>() {
         fun bind(movie: Movie) {
             itemView.textName.text = movie.name
             itemView.textYear.text = movie.year
+            itemView.setOnClickListener {
+                onClickListener?.invoke(movie)
+            }
         }
     }
 
     private var data: List<Movie> = emptyList()
+
+    var onClickListener: ((Movie) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

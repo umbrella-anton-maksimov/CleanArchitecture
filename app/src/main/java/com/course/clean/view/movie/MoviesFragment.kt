@@ -19,8 +19,9 @@ import javax.inject.Inject
 
 class MoviesFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModel: MovieListViewModel
+    private val flow: MoviesActivityFlow by lazy { activity as MoviesActivity }
+
+    @Inject lateinit var viewModel: MovieListViewModel
 
     //==================== Lifecycle ==========================
 
@@ -48,6 +49,9 @@ class MoviesFragment : Fragment() {
     }
 
     private fun initAdapter() {
+        viewModel.adapter.onClickListener= {
+            flow.openMovieDetails(it)
+        }
         recyclerView.adapter = viewModel.adapter
         val context = context ?: return
         val divider = HorizontalDivider(context)

@@ -25,8 +25,7 @@ class MovieListViewModel(private val fetchMoviesUseCase: FetchMoviesUseCase) {
     private inner class FetchMoviesSubscriber : UseCaseSubscriber<List<Movie>>() {
         override fun onNext(data: List<Movie>?) {
             data?.let {
-                val data = it.shuffled()
-                adapter.updateContent(data)
+                adapter.updateContent(it)
             }
         }
     }
