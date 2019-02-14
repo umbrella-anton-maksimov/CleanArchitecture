@@ -3,40 +3,58 @@ package com.course.clean.view.movie
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.course.clean.R
-import com.course.clean.viewmodel.MovieListViewModel
-import com.course.view.HorizontalDivider
-import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
+import com.course.clean.core.FlowManager
+import kotlinx.android.synthetic.main.activity_movies.*
 
-class MoviesActivity : AppCompatActivity() {
+class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
 
-    @Inject lateinit var viewModel: MovieListViewModel
+    private val flowManager by lazy {
+        FlowManager(supportFragmentManager)
+    }
 
-    //==================== Lifecycle ==========================
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        init()
+        setContentView(R.layout.activity_movies)
+        initToolbar()
+        initFragment()
     }
 
-    override fun onDestroy() {
-        viewModel.onDestroy()
-        super.onDestroy()
+    override fun onBackPressed() = back()
+
+    override fun back() = when {
+        flowManager.size <= 1 -> finish()
+        else -> flowManager.popBackStack()
     }
 
-    //==================== Initialization ==========================
 
-    private fun init() {
-        initAdapter()
-        viewModel.fetchMovies()
+    private fun showToolbar(visible: Boolean) {
+        when (visible) {
+            true -> supportActionBar?.show()
+            false -> supportActionBar?.hide()
+        }
     }
 
-    private fun initAdapter() {
-        recyclerView.adapter = viewModel.adapter
-        val divider = HorizontalDivider(this)
-        recyclerView.addItemDecoration(divider)
+    private fun showArrow() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+    }
+
+    private fun hideArrow() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setHomeButtonEnabled(false)
+    }
+
+
+    private fun initFragment() {
+        flowManager.addFragment(MoviesFragment::class.java)
+    }
+
+    private fun initToolbar() {
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        toolbar.setNavigationOnClickListener { back() }
+        setSupportActionBar(toolbar)
+        showToolbar(true)
+        hideArrow()
     }
 }

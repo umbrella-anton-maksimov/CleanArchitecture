@@ -16,6 +16,7 @@ import javax.inject.Singleton
     modules = [
         ApplicationModule::class,
         ActivityBuilderModule::class,
+        FragmentBuilderModule::class,
         RepositoryModule::class
     ]
 )
