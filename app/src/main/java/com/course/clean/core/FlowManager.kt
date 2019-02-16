@@ -1,7 +1,7 @@
 package com.course.clean.core
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.course.clean.R
 import java.util.*
 import kotlin.collections.HashMap
@@ -12,22 +12,22 @@ import kotlin.collections.HashMap
  */
 
 class FlowManager(
-        private val fragmentManager: FragmentManager,
-        private val containerId: Int = R.id.container
+    private val fragmentManager: FragmentManager,
+    private val containerId: Int = R.id.container
 ) {
     private val backStackTag = Stack<String>()
-    private val cachedFragments = HashMap<Class<*>, Fragment>()
+//    private val cachedFragments = HashMap<Class<*>, Fragment>()
 
     val currentTag: String?
         get() = if (backStackTag.size < 1) null else backStackTag.peek()
 
     fun <T : Fragment> navigateTo(fragmentClass: Class<T>,
-                                  params: Map<String, Any>? = null,
-                                  addToBackStack: Boolean = true) {
+                                                        params: Map<String, Any>? = null,
+                                                        addToBackStack: Boolean = true) {
         val fragmentTransaction = fragmentManager.beginTransaction()
-        val fragment = cachedFragments[fragmentClass] ?: fragmentClass.newInstance().apply {
+        val fragment =  fragmentClass.newInstance().apply {
             params?.toBundle()?.let { this.arguments = it }
-            cachedFragments[fragmentClass] = this
+//            cachedFragments[fragmentClass] = this
         }
         if (addToBackStack) fragmentTransaction.replace(containerId, fragment).addToBackStack(null)
         else fragmentTransaction.replace(containerId, fragment)

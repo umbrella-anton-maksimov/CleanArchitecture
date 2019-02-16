@@ -1,4 +1,4 @@
-package com.course.clean.core.base
+package com.course.clean.core.base.usecase
 
 import okhttp3.ResponseBody
 

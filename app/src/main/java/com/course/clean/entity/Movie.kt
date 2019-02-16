@@ -8,21 +8,21 @@ import android.os.Parcelable
  * anton.maksimov@umbrella-web.com
  */
 
-data class Movie(val id: Int,
+data class Movie(val id: Long,
                  val name: String,
                  val year: String,
-                 val image: String) : Parcelable {
+                 val imageUrl: String) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
+            parcel.readLong(),
             parcel.readString() ?: "",
             parcel.readString() ?: "",
             parcel.readString() ?: "")
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeLong(id)
         parcel.writeString(name)
         parcel.writeString(year)
-        parcel.writeString(image)
+        parcel.writeString(imageUrl)
     }
 
     override fun describeContents(): Int {

@@ -1,11 +1,10 @@
 package com.course.clean.usecase.movies
 
-import com.course.clean.core.base.UseCase
+import com.course.clean.core.base.usecase.UseCase
 import com.course.clean.entity.Movie
 import com.course.clean.repository.MoviesRepository
 import com.course.clean.usecase.movies.FetchMoviesUseCase.Params
 import io.reactivex.Flowable
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**

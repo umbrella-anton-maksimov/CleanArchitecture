@@ -1,7 +1,7 @@
 package com.course.clean.view.adapter
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import com.course.clean.R
 import com.course.clean.entity.Movie
@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.item_movie.view.*
  */
 
 class MoviesAdapter : RecyclerView.Adapter<ViewHolder>() {
+
+    init {
+        setHasStableIds(true)
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie) {
@@ -36,6 +40,8 @@ class MoviesAdapter : RecyclerView.Adapter<ViewHolder>() {
     }
 
     override fun getItemCount() = data.size
+
+    override fun getItemId(position: Int) = data[position].id
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val movie = data[position]

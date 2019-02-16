@@ -2,7 +2,7 @@ package com.course.clean.core
 
 import android.app.Activity
 import android.app.Application
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.course.clean.core.di.ApplicationComponent
 import com.course.clean.core.di.ApplicationModule
 import com.course.clean.core.di.DaggerApplicationComponent

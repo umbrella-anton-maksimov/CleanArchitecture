@@ -1,7 +1,9 @@
 package com.course.clean.core.di
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
+import com.course.clean.view.movie.MovieDetailsFragment
 import com.course.clean.view.movie.MoviesFragment
+import com.course.clean.view.movie.di.MovieDetailsFragmentComponent
 import com.course.clean.view.movie.di.MoviesFragmentComponent
 import dagger.Binds
 import dagger.Module
@@ -15,7 +17,12 @@ import dagger.multibindings.IntoMap
  * anton.maksimov@umbrella-web.com
  */
 
-@Module(subcomponents = [MoviesFragmentComponent::class])
+@Module(
+    subcomponents = [
+        MoviesFragmentComponent::class,
+        MovieDetailsFragmentComponent::class
+    ]
+)
 abstract class FragmentBuilderModule {
 
     @Binds
@@ -23,6 +30,13 @@ abstract class FragmentBuilderModule {
     @FragmentKey(MoviesFragment::class)
     internal abstract fun bindMoviesFragment(
         builder: MoviesFragmentComponent.Builder
+    ): AndroidInjector.Factory<out Fragment>
+
+    @Binds
+    @IntoMap
+    @FragmentKey(MovieDetailsFragment::class)
+    internal abstract fun bindMovieDetailsFragment(
+        builder: MovieDetailsFragmentComponent.Builder
     ): AndroidInjector.Factory<out Fragment>
 
 }

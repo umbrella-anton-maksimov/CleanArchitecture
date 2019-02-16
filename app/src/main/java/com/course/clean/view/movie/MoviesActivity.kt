@@ -1,7 +1,7 @@
 package com.course.clean.view.movie
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.course.clean.R
 import com.course.clean.core.FlowManager
 import com.course.clean.entity.Movie
@@ -28,7 +28,7 @@ class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
     }
 
     override fun openMovieDetails(movie: Movie) {
-        val params = hashMapOf("movie" to movie)
+        val params = hashMapOf(KEY_MOVIE to movie)
         flowManager.navigateTo(MovieDetailsFragment::class.java, params)
     }
 
