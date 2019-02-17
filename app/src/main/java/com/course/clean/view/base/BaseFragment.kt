@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 abstract class BaseFragment : Fragment() {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+//    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater,

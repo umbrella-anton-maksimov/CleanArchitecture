@@ -1,11 +1,10 @@
-package com.course.clean.view.adapter
+package com.course.clean.view.adapter.movie
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import com.course.clean.R
 import com.course.clean.entity.Movie
-import com.course.clean.view.adapter.MoviesAdapter.ViewHolder
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 /**
@@ -13,37 +12,27 @@ import kotlinx.android.synthetic.main.item_movie.view.*
  * anton.maksimov@umbrella-web.com
  */
 
-class MoviesAdapter : RecyclerView.Adapter<ViewHolder>() {
+class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     init {
         setHasStableIds(true)
-    }
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(movie: Movie) {
-            itemView.textName.text = movie.name
-            itemView.textYear.text = movie.year
-            itemView.setOnClickListener {
-                onClickListener?.invoke(movie)
-            }
-        }
     }
 
     private var data: List<Movie> = emptyList()
 
     var onClickListener: ((Movie) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, position: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie, parent, false)
-        return ViewHolder(view)
+        return MovieViewHolder(view)
     }
 
     override fun getItemCount() = data.size
 
     override fun getItemId(position: Int) = data[position].id
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: MovieViewHolder, position: Int) {
         val movie = data[position]
         viewHolder.bind(movie)
     }
@@ -54,6 +43,19 @@ class MoviesAdapter : RecyclerView.Adapter<ViewHolder>() {
         result.dispatchUpdatesTo(this)
         this.data = data
     }
+
+    inner class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        fun bind(movie: Movie) {
+            itemView.textName.text = movie.name
+            itemView.textYear.text = movie.year
+            itemView.setOnClickListener {
+                onClickListener?.invoke(movie)
+            }
+        }
+
+    }
+
 
     private class Callback(val oldList: List<Movie>,
                            val newList: List<Movie>) : DiffUtil.Callback() {

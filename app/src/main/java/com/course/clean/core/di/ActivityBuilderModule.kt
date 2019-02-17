@@ -1,8 +1,8 @@
 package com.course.clean.core.di
 
 import android.app.Activity
-import com.course.clean.view.movie.MoviesActivity
-import com.course.clean.view.movie.di.MoviesActivityComponent
+import com.course.clean.view.movie.flow.MoviesActivity
+import com.course.clean.view.movie.flow.di.MoviesActivityComponent
 import dagger.Binds
 import dagger.Module
 import dagger.android.ActivityKey
@@ -22,7 +22,7 @@ abstract class ActivityBuilderModule {
     @IntoMap
     @ActivityKey(MoviesActivity::class)
     internal abstract fun bindMoviesActivity(
-            builder: MoviesActivityComponent.Builder
+        builder: MoviesActivityComponent.Builder
     ): AndroidInjector.Factory<out Activity>
 
 }

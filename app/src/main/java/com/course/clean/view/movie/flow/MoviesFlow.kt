@@ -1,4 +1,4 @@
-package com.course.clean.view.movie
+package com.course.clean.view.movie.flow
 
 import com.course.clean.entity.Movie
 
@@ -7,7 +7,7 @@ import com.course.clean.entity.Movie
  * anton.maksimov@umbrella-web.com
  */
 
-interface MoviesActivityFlow {
+interface MoviesFlow {
     fun back()
     fun openMovieDetails(movie: Movie)
 }

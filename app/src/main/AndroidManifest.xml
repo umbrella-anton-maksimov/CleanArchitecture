@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             android:name="com.course.clean.core.Application"
             android:theme="@style/AppTheme">
-        <activity android:name="com.course.clean.view.movie.MoviesActivity">
+        <activity android:name="com.course.clean.view.movie.flow.MoviesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

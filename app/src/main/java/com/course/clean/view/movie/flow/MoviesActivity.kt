@@ -1,19 +1,24 @@
-package com.course.clean.view.movie
+package com.course.clean.view.movie.flow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.course.clean.R
 import com.course.clean.core.FlowManager
 import com.course.clean.entity.Movie
+import com.course.clean.view.movie.KEY_MOVIE
+import com.course.clean.view.movie.details.MovieDetailsFragment
+import com.course.clean.view.movie.list.MovieListFragment
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_movies.*
 
-class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
+class MoviesActivity : AppCompatActivity(), MoviesFlow {
 
     private val flowManager by lazy {
         FlowManager(supportFragmentManager)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
         initToolbar()
@@ -51,7 +56,7 @@ class MoviesActivity : AppCompatActivity(), MoviesActivityFlow {
 
 
     private fun initFragment() {
-        flowManager.navigateTo(MoviesFragment::class.java)
+        flowManager.navigateTo(MovieListFragment::class.java)
     }
 
     private fun initToolbar() {

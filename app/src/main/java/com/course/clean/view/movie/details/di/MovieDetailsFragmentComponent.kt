@@ -1,7 +1,6 @@
-package com.course.clean.view.movie.di
+package com.course.clean.view.movie.details.di
 
-import com.course.clean.view.movie.MovieDetailsFragment
-import com.course.clean.view.movie.MoviesFragment
+import com.course.clean.view.movie.details.MovieDetailsFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
