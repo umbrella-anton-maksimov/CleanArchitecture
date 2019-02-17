@@ -1,8 +1,6 @@
 package com.course.clean.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.course.clean.entity.Movie
 import javax.inject.Inject
 
@@ -11,14 +9,13 @@ import javax.inject.Inject
  * anton.maksimov@umbrella-web.com
  */
 
-class MovieViewModel @Inject constructor(): ViewModel() {
+class MovieViewModel @Inject constructor() : ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie> = _movie
 
-   fun init(movie: Movie?) {
+    fun init(movie: Movie?) {
         this._movie.postValue(movie)
     }
-
 
 }

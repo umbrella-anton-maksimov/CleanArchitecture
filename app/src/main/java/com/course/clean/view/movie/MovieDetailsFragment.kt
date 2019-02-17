@@ -1,9 +1,7 @@
 package com.course.clean.view.movie
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.course.clean.R
@@ -11,7 +9,6 @@ import com.course.clean.core.extentions.load
 import com.course.clean.entity.Movie
 import com.course.clean.view.base.BaseFragment
 import com.course.clean.viewmodel.MovieViewModel
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.android.synthetic.main.item_movie.*
 
@@ -23,7 +20,8 @@ import kotlinx.android.synthetic.main.item_movie.*
 class MovieDetailsFragment : BaseFragment() {
 
     private val viewModel: MovieViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(MovieViewModel::class.java)
+        ViewModelProviders.of(this, viewModelFactory)
+            .get(MovieViewModel::class.java)
     }
 
     //==================== Lifecycle ==========================
@@ -55,10 +53,13 @@ class MovieDetailsFragment : BaseFragment() {
     }
 
     private fun initViews() {
+
         viewModel.movie.observe(this, Observer {
             textName.text = it.name
             textYear.text = it.year
             image.load(it.imageUrl)
         })
+
     }
+
 }
